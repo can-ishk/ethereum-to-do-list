@@ -119,14 +119,26 @@ App = {
       createTask: async () => {
         App.setLoading(true)
         const content = $('#newTask').val()
-        await App.ToDoList.createTask(content)
+        try {
+            await App.ToDoList.createTask(content)
+        }
+        catch(err) {
+            console.log(err)
+            window.alert("Transaction Denied")
+        }
         window.location.reload()
       },
     
       toggleCompleted: async (e) => {
         App.setLoading(true)
         const taskId = e.target.name
-        await App.ToDoList.toggleCompleted(taskId)
+        try{
+            await App.ToDoList.toggleCompleted(taskId)
+        }
+        catch(err) {
+            console.log(err)
+            window.alert("Transaction Denied")
+        }   
         window.location.reload()
       }
 }
