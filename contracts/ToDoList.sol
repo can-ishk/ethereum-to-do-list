@@ -8,6 +8,11 @@ contract ToDoList {
         string content;
         bool completed;
     }
+    event TaskCreated(
+        uint id,
+        string content,
+        bool completed
+    );
     mapping(uint => Task) public tasks; // basically a hashmap to store the tasks
 
     constructor() public {
@@ -18,6 +23,9 @@ contract ToDoList {
     function createTask(string memory _content) public{
         taskCount++;
         tasks[taskCount] = Task(taskCount, _content, false);
+        // task created event
+        emit TaskCreated(taskCount, _content, false);
+
     }
     function toggleCompleted(uint _id) public{
         Task memory _task = tasks[_id];
